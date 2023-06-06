@@ -62,24 +62,34 @@ function runSolutions(sourceCount) {
 }
 
 // Adjust this input to see how your solutions perform under various loads.
-runSolutions(100);
+runSolutions(1000);
 
 /*
-100
+runSolutions(100);
 
 ***********************************
-Logs printed:            24208
-Time taken (s):          1.415
-Logs/s:                  17108.127208480564
+Logs printed:            23499
+Time taken (s):          0.734
+Logs/s:                  32014.9863760218
 ***********************************
 */
 
 /*
-1000
+runSolutions(1000);
 
 ***********************************
-Logs printed:            238379
-Time taken (s):          28.284
-Logs/s:                  8428.05119502192
+Logs printed:            24430
+Time taken (s):          1.142
+Logs/s:                  21392.294220665503
+***********************************
+*/
+
+/*
+runSolutions(10000);
+
+***********************************
+Logs printed:            2391802
+Time taken (s):          116.278
+Logs/s:                  20569.686441115256
 ***********************************
 */
