@@ -1,5 +1,4 @@
-// MinHeap
-// @vibertthio (github.com/vibertthio)
+// MinHeap JS implementation from here: https://gist.github.com/tpae/54ec7371f947505967a2036b9c002428
 
 function Node(val, key) {
   this.val = val;

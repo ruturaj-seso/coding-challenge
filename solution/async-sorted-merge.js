@@ -10,6 +10,8 @@ module.exports = async (logSources, printer) => {
     buffers[i] = [];
   }
 
+  // Core algorithm is the same as sync solution
+  // except we maintain a buffer of async popped elements
   await hydrateBuffers(buffers, logSources, isDrained);
 
   while (logsRemaining(buffers)) {
@@ -35,22 +37,10 @@ module.exports = async (logSources, printer) => {
   printer.done();
 };
 
-async function addToQueue(queue, idx, sourceBuffers) {
-  let logEntry = sourceBuffers[idx].shift();
-  if (logEntry) {
-    queue.insert({ logEntry, idx }, logEntry.date);
-  }
-}
-
-function logsRemaining(buffers) {
-  for (let buffer of buffers) {
-    if (buffer.length > 0) return true;
-  }
-
-  return false;
-}
-
 async function hydrateBuffers(buffers, logSources, isDrained) {
+  // Batch size is arbitrary when working with a single thread.
+  // If we used worker threads, we could increase parallelization
+  // and reduce total execution time
   const batchSize = logSources.length;
   for (let n = 0; n < batchSize; n++) {
     let promises = [];
@@ -70,5 +60,20 @@ async function getNextForSource(buffers, idx, logSources, isDrained) {
     buffers[idx].push(logEntry);
   } else {
     isDrained[idx] = true;
+  }
+}
+
+function logsRemaining(buffers) {
+  for (let buffer of buffers) {
+    if (buffer.length > 0) return true;
+  }
+
+  return false;
+}
+
+async function addToQueue(queue, idx, sourceBuffers) {
+  let logEntry = sourceBuffers[idx].shift();
+  if (logEntry) {
+    queue.insert({ logEntry, idx }, logEntry.date);
   }
 }

@@ -6,10 +6,14 @@ const MinHeap = require("./minheap");
 module.exports = (logSources, printer) => {
   let priorityQueue = new MinHeap();
 
+  // Add first element of each source to queue
   for (let i in logSources) {
     addToQueue(priorityQueue, i, logSources);
   }
 
+  // Pop from queue
+  // Add next element from source that the popped element came from
+  // Continue until queue is empty
   while (priorityQueue.size() > 0) {
     let entry = priorityQueue.pop().val;
     printer.print(entry.logEntry);
