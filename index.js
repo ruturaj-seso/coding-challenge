@@ -63,3 +63,23 @@ function runSolutions(sourceCount) {
 
 // Adjust this input to see how your solutions perform under various loads.
 runSolutions(100);
+
+/*
+100
+
+***********************************
+Logs printed:            24208
+Time taken (s):          1.415
+Logs/s:                  17108.127208480564
+***********************************
+*/
+
+/*
+1000
+
+***********************************
+Logs printed:            238379
+Time taken (s):          28.284
+Logs/s:                  8428.05119502192
+***********************************
+*/
